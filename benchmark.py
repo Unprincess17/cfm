@@ -55,6 +55,7 @@ def main():
                         help="List of cpus to use for workloads that support it")
 
     args = parser.parse_args()
+    print(args)
     run_benchmark(args)
 
 

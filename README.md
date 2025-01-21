@@ -41,6 +41,11 @@ The framework and scripts rely on the cgroup system to be mounted at /cgroup2. P
     * Changes ownership of the mount point (and all nested files) to the current user
     * Enables prefetching
 
+
+`stat -fc %T /sys/fs/cgroup/`
+如果输出是`cgroup2fs`，则表示使用的是cgroup v2。
+如果输出是`tmpfs`，则表示使用的是cgroup v1。
+
 ## Protocol Buffers
 We use [the grpc framework](https://grpc.io) and [protocol buffers](https://developers.google.com/protocol-buffers/docs/pythontutorial) to communicate between the scheduler and servers. The messages that we've defined are in `protocol/protocol.proto`. To generate them the corresponding `.py` files, execute the following command in the `protocol` directory:
     
