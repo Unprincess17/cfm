@@ -408,7 +408,7 @@ class Stream(Workload):
         pinned_cpus_string = ','.join(map(str, pinned_cpus))
         set_cpu = 'taskset -c {}'.format(pinned_cpus_string)
 
-        shell_cmd = 'nice -n -2 /usr/bin/time -v ./stream_c.exe'.format(len(pinned_cpus))
+        shell_cmd = 'sudo nice -n -2 /usr/bin/time -v ./stream_c.exe'.format(len(pinned_cpus))
         full_command = ' '.join((cd_dir, prefix, 'exec', set_cpu, shell_cmd))
         return full_command
 
