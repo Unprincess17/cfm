@@ -17,6 +17,25 @@ You'll need python3, grpcio, grpcio-tools, numpy and scipy to execute various pa
     * Init submodules `git submodule update --init`
 * spark
     * We assume the user has installed [spark 2.4](https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz) at `~/spark-2.4.0-bin-hadoop2.7`
+    ```bash
+    cd ~/ && \
+    wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz && \
+    tar -xzf spark-2.4.0-bin-hadoop2.7.tgz && \
+    rm spark-2.4.0-bin-hadoop2.7.tgz
+    sudo apt install openjdk-8-jdk && \
+    mkdir -p ~/spark-2.4.0-bin-hadoop2.7/data/sosp/ && \
+    tar -zxvf web-BerkStan.txt.tar.gz -C ~/spark-2.4.0-bin-hadoop2.7/data/sosp/
+
+    cd /path/to/cfm/spark/pagerank/ && \
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list && \
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee /etc/apt/sources.list.d/sbt_old.list && \
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823 && \
+    sudo apt-get update && \
+    sudo apt-get install sbt && \
+    sbt compile && \
+    sbt run # In my case, only after run, I got the pagerank jar file
+
+    ```
 * kmeans
     * Requires sklearn available in python3
 * memcached
