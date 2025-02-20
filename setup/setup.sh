@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# cgroup2
+sudo mkdir /cgroup2 && \
+./setup/init_bench_cgroups.sh && \
+
+
 # faasnap
 git submodule update --init  --recursive && \
 pushd faasnap && \
