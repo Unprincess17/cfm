@@ -26,7 +26,10 @@ def run_benchmark(args):
     else:
         pinned_cpus = range(workload_class.cpu_req)
 
-    workload = workload_class(args.id, pinned_cpus, args.ratio)
+    if(args.name == "faasnap"):
+        workload = workload_class(args.id, pinned_cpus, args.ratio, args.fbench)
+    else:
+        workload = workload_class(args.id, pinned_cpus, args.ratio)
 
     try:
         workload.start()
@@ -40,7 +43,7 @@ def main():
     # Parse Command Line Arguments
     workload_choices = ['quicksort', 'linpack', 'tf-inception',
                         'tf-resnet', 'spark', 'kmeans', 'memaslap',
-                        'stream']
+                        'stream', "faasnap"]
 
     parser = argparse.ArgumentParser(description='Run a workload in a '
                                      'parameterized container')
@@ -53,6 +56,7 @@ def main():
                         help="Workload id used for container name")
     parser.add_argument('--cpus', default=[],type=lambda l:list(map(int, l.split(','))),
                         help="List of cpus to use for workloads that support it")
+    parser.add_argument('--fbench',default="hello", help="benchmark name for running faasnap_bench")
 
     args = parser.parse_args()
     print(args)

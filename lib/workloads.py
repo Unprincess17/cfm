@@ -412,6 +412,27 @@ class Stream(Workload):
         full_command = ' '.join((cd_dir, prefix, 'exec', set_cpu, shell_cmd))
         return full_command
 
+class Faasnap(Workload):
+    wname = "faasnap"
+    ideal_mem = 8192
+    min_ratio = 0.1
+    min_mem = int(min_ratio * ideal_mem)
+    binary_name = "hello"
+    cpu_req = 1
+    coeff = [0]
+    
+    def __init__(self, idd, pinned_cpus, mem_ratio=1, bench="hello"):
+        super().__init__(idd, pinned_cpus, mem_ratio)
+        self.binary_name = bench
+    
+    def get_cmdline(self, procs_path, pinned_cpus):
+        prefix = "echo $$ > {} &&".format(procs_path)
+        shell_cmd = '/usr/bin/time -v' + ' ' + f'python {constants.WORK_DIR}/faasnap/rootfs/guest/daemon.py {self.binary_name}'
+        pinned_cpus_string = ','.join(map(str, pinned_cpus))
+        set_cpu = 'taskset -c {}'.format(pinned_cpus_string)
+        full_command = ' '.join((prefix, 'exec', set_cpu, shell_cmd))
+        return full_command
+
 def get_workload_class(wname):
     return {'quicksort': Quicksort,
             'linpack': Linpack,
@@ -420,4 +441,6 @@ def get_workload_class(wname):
             'spark': Spark,
             'kmeans': Kmeans,
             'memaslap': Memaslap,
-            'stream': Stream}[wname]
+            'stream': Stream,
+            'faasnap': Faasnap
+            }[wname]

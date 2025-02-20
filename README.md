@@ -5,6 +5,9 @@ On the client node the fastswap kernel and driver must be loaded. On the far mem
 ## General pre-requisites
 
 You'll need python3, grpcio, grpcio-tools, numpy and scipy to execute various parts of our framework. Please make sure your python environment can see these modules.
+```
+pip install grpcio grpcio-tools numpy scipy psutil
+```
 
 ## Workload setup (for single and multi-workload benchmarks)
 
