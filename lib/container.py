@@ -15,7 +15,7 @@ class Container:
 
     def delete(self):
         path = self.get_cont_path()
-        ret = utils.shell_exec("rm -rf {0}".format(path))[0]
+        ret = utils.shell_exec("rmdir {0}".format(path))[0]
         if ret:
             raise RuntimeError("Error deleting {}".format(path))
 
