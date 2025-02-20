@@ -9,7 +9,7 @@ sudo mkdir /cgroup2 && \
 git submodule update --init  --recursive && \
 pushd faasnap && \
 sudo apt install -y redis-server && \
-pip install grpcio grpcio-tools numpy scipy scikit-learn psutil redis flask && \
+pip install grpcio grpcio-tools numpy scipy scikit-learn psutil redis flask chameleon pyaes && \
 python populate_resource.py && \
 popd && \
 
