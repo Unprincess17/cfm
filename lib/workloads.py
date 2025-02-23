@@ -422,8 +422,8 @@ class Faasnap(Workload):
     coeff = [0]
     
     def __init__(self, idd, pinned_cpus, mem_ratio=1, bench="hello"):
-        super().__init__(idd, pinned_cpus, mem_ratio)
         self.binary_name = bench
+        super().__init__(idd, pinned_cpus, mem_ratio)
     
     def get_cmdline(self, procs_path, pinned_cpus):
         prefix = "echo $$ > {} &&".format(procs_path)
